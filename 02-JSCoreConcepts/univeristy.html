@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+          names = ['Piotr', 'Anna', 'Michał', 'Paulina', 'Mateusz', 'Magda'];
+ 
+ class Students {
+     constructor(names) {
+         this.names = names
+     }
+  
+     startWith(letter){
+         let arr = new Array()
+         for(let i = 0 ; i < names.length; i++){
+            if(names[i].startsWith(letter)){
+                arr.push(names[i])
+            }
+         }  
+         return arr
+     }
+  
+     sort() {
+         let arr = names.sort();
+		 return arr
+     }
+  
+     get() {
+         return names
+     }
+  
+     getFirst(n) {
+         let arr = new Array()
+         for(let i =0 ; i < n; i++)
+             arr.push(names[i])
+  
+         return arr
+     }
+ }
+
+            students = new Students(names);
+            console.log(students.getFirst(4))
+            console.log(students.get());
+            console.log(students.sort());
+            console.log(students.startWith('P'));
+            console.log(students.startWith('M').sort());
+            console.log(students.sort().getFirst(4));
+            console.log(students.startWith('M').sort().getFirst(2));
+            console.log(students.get());
+
+
+
+
+            
+        </script>   
+    </body>
+</html>>

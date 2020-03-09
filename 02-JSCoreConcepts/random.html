@@ -2,13 +2,14 @@
     <body>
         <script>
          let array = () =>{
-             arr = new Array(10);
-             for(i=1;i<=10;i++){
-                 arr[i].push(Math.random()); 
+             arr = new Array();
+             for(i=10; i>=1;i--){
+                 arr.push(Math.floor(Math.random()*20+5))[i]; 
              }
              return arr;
          }
          console.log(array());
         </script>
+        
     </body>
 </html>

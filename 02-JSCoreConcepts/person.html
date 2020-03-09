@@ -1,0 +1,22 @@
+<html>
+    <body>
+        <script>
+            class Person {
+                constructor(imie, nazwisko){
+                    this.imie = imie;
+                    this.nazwisko = nazwisko;
+                }
+            sayHiUpper() {
+                console.log(this.imie + " "+ this.nazwisko.toUpperCase());
+            }
+            
+            sayInitials(){
+                console.log(this.imie.charAt(0).toUpperCase() + '. ' + this.nazwisko.charAt(0).toUpperCase() +'.');
+            }
+            }
+            person = new Person('Jan', 'Nowak');
+            person.sayHiUpper();
+            person.sayInitials();
+        </script>
+    </body>
+</html>
