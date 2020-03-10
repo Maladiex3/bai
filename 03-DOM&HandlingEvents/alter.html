@@ -4,10 +4,10 @@
 		<title>Pink Floyd</title>
 		<meta charset="UTF-8">
 	</head>
-	<body>
-		<h1>Another Brick in the Wall</h1>
-		<h3>Pink Floyd</h3>
-		<p>We don't need no education<br>
+	<body ondblclick="myBackground(this)">
+		<h1 id="click" onclick="myClick()">Another Brick in the Wall</h1>
+		<h3 onclick="myDescript()">Pink Floyd</h3>
+		<p onclick="myItalic(this)" oncopy="myCopy()">We don't need no education<br>
 		We don't need no thought control<br>
 		No dark sarcasm in the classroom<br>
 		Teachers leave them kids alone<br>
@@ -15,13 +15,36 @@
 		All in all it's just another brick in the wall<br>
 		All in all you're just another brick in the wall</p>
 		
-		<p style="visibility: hidden;">Pink Floyd were an English rock band formed in London.<br>
+		<p style="visibility: hidden;" onclick="myImg(this)">Pink Floyd were an English rock band formed in London.<br>
 		They achieved international acclaim with their progressive<br>
 		and psychedelic music.</p>
 		
 		<script>
-			// a JavaScript code here ...
+			function myClick(){
+				text = document.getElementById('click').innerHTML;
+				document.getElementById("click").innerHTML = text + " (Part 2)";
+				//this.detachEvent("click", myClick());
+			}
 			
+			function myDescript(){
+				desciption = document.getElementsByTagName("p")[1].style.visibility ="visible";
+			}
+			
+			function myItalic(e){
+				e.style.fontStyle = "italic";
+			}
+
+			function myBackground(e){
+				e.style.backgroundColor = "yellow";
+			}
+
+			function myCopy(){
+				alert("aaaaaaaaaaaaa");
+			}
+
+			function myImg(e){
+				e.innerHTML += "<br><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/DarkSideOfTheMoon1973.jpg/360px-DarkSideOfTheMoon1973.jpg'>"
+			}
 		</script>
 	</body>
 </html>
