@@ -6,8 +6,26 @@
 	</head>
 	<body>
 		<script>
-			// a JavaScript code here ...
-			
+				const table = document.createElement("table")
+				table.style.border = "1px solid"
+				table.style.borderCollapse = "collapse"
+				let cellCount = 1	
+
+				for(let i=0;i<2;i++){
+					const tr = document.createElement("tr")
+					for(let j=0;j<2;j++){
+						const td = document.createElement("td")
+						td.innerText = cellCount
+						td.style.border = "1px solid"
+						td.style.borderCollapse = "collapse"
+						td.style.width = "50px"
+						td.style.textAlign = "center"
+						tr.appendChild(td)
+						cellCount++;
+						table.appendChild(tr)
+					}	
+				}
+				document.body.appendChild(table)		
 		</script>
 	</body>
 </html>

@@ -4,6 +4,7 @@
 <head>
     <title>Shopping List</title>
     <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -18,8 +19,12 @@
         <li>breakfast cereal</li>
         <li>bread</li>
     </ol>
-
+   
     <script>
+      $(document).on("dblclick", 'li', function() {
+        $(this).remove();
+    });
+
     	function newElements() {
 
             var todo = document.createElement("li");
@@ -29,5 +34,6 @@
         }
 
     </script>
+
 </body>
 </html>
