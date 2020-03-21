@@ -1,0 +1,51 @@
+<html>
+    <body>
+		<h2>Currency Exchange Rates</h2>
+		
+		<p>Open a console and then click the button</p>
+		<input type="button" value="Make a connection" onclick="connect()">
+		<p id="currencies" style="white-space: pre-wrap;" ></p>
+        <script>
+			var flag = false 
+			function connect() {
+			if(!flag){
+			fetch('http://api.nbp.pl/api/exchangerates/tables/a/today/?format=json')
+			.then(
+				function(response) {
+				if (response.status !== 200) {
+					console.log('Looks like there was a problem. Status Code: ' +
+					response.status);
+					return;
+				}
+
+				// Examine the text in the response
+				response.json().then(function(data) {
+					let p = document.getElementById('currencies')
+					console.log(data)
+					flag = true
+					data[0].rates.map(curr => {
+						switch(curr.code){
+							case 'USD':
+								p.innerText += curr.currency + " (" + curr.code +")" + "\nexchangerate = " + curr.mid + "\n\n"
+								break;
+							case 'GBP':
+								p.innerText += curr.currency + " (" + curr.code +")" + "\nexchangerate = " + curr.mid +"\n\n"
+								break;
+							case 'EUR':
+								p.innerText += curr.currency + " (" + curr.code +")" + "\nexchangerate = " + curr.mid +"\n\n"
+								break;
+						}
+							
+
+					});
+				});
+				}
+			)
+			.catch(function(err) {
+				console.log('Fetch Error :-S', err);
+			});
+						}
+						}
+        </script>
+    </body>
+</html>

@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+       
+    </head>
+    <body>
+        <button onclick="displayData()">Click</button>
+        <canvas id="myChart" width="400" height="400"></canvas>
+        <script>     
+                
+            var ctx = document.getElementById('myChart').getContext('2d');
+
+            var price = new Array()
+            var dates = new Array()
+
+            fetch('http://api.nbp.pl/api/cenyzlota/last/10/?format=json')
+                .then(
+                    function(response) {
+                    if (response.status !== 200) {
+                        console.log('Looks like there was a problem. Status Code: ' +
+                        response.status);
+                        return;
+                    }
+                    // Examine the text in the response
+                    response.json().then(function(data) {
+                        data.map(gold => {
+                            price.push(gold.cena)
+                            dates.push(gold.data)
+                        })
+                    });
+                    }
+                )
+                .catch(function(err) {
+                    console.log('Fetch Error :-S', err);
+                });
+            function displayData(){
+                        
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: '# of Votes',
+                        data: price,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            "yellow","black","purple","brown"
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            "yellow","black","purple","brown"
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });}
+            </script>
+    </body>
+</html>

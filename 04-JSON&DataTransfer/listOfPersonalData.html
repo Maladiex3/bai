@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <script type="text/javascript" src="https://gist.githubusercontent.com/Maladiex3/3df30aef0c788a994afa29bb62748145/raw/53f8a43e537e8b3a1126257be0c4abb51f5f393e/people.json"></script>
+    </head>
+    <body>
+        <h1>Personal Data</h1>
+		<p>Open a console and then click the button</p>
+		<input type="button" value="Make a connection" onclick="displayName()">
+        <p id="persons" style="white-space: pre-wrap;"></p>
+        <script>
+            var flag = false 
+			function displayName(){
+				if(!flag){
+                fetch('https://gist.githubusercontent.com/Maladiex3/3df30aef0c788a994afa29bb62748145/raw/53f8a43e537e8b3a1126257be0c4abb51f5f393e/people.json')
+                .then(
+                    function(response) {
+                    if (response.status !== 200) {
+                        console.log('Looks like there was a problem. Status Code: ' +
+                        response.status);
+                        return;
+                    }
+                    flag = true
+                    // Examine the text in the response
+                    response.json().then(function(data) {
+                        let quantitiy = 0;
+                        data.map(person => {
+                            quantitiy++;
+                            document.getElementById("persons").innerHTML += quantitiy + ". " + person.name + " " + person.surname.toUpperCase() +", " + person.country + "\n"
+                        })
+                    });
+                    }
+                )
+                .catch(function(err) {
+                    console.log('Fetch Error :-S', err);
+                });
+                }
+			}
+        </script>
+    </body>
+</html>

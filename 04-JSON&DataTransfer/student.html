@@ -3,15 +3,39 @@
 	<head>
 		<title>Student</title>
 		<meta charset="UTF-8">
+		<script type="text/javascript" src="https://gist.githubusercontent.com/Maladiex3/56bad719a91e1d44e92d422a52ef8707/raw/2c840b2b59eefc29ce1bcb82307db30f952d177a/myName.json"></script>
 	</head>
 	<body>
 		<h1>Student</h1>
 		<p>Open a console and then click the button</p>
-		<input type="button" value="Display student's data">
+		<input type="button" value="Display student's data" onclick="displayName()">
 		<p id="personalData"></p>
 
 		<script>
 
+			function displayName(){
+				/*const json = '{"name":"Daria","surname":"Marek"}';
+				const obj = JSON.parse(myName.json);
+				
+				let personalData = obj.name + " " + obj.surname
+				console.log(personalData);
+
+				document.getElementById("personalData").innerHTML = personalData*/
+				var xmlhttp = new XMLHttpRequest();
+
+					xmlhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						var myObj = JSON.parse(this.responseText);
+						document.getElementById("personalData").innerHTML = myObj.name + " " + myObj.surname;
+					}
+					};
+					xmlhttp.open("GET", "https://gist.githubusercontent.com/Maladiex3/56bad719a91e1d44e92d422a52ef8707/raw/2c840b2b59eefc29ce1bcb82307db30f952d177a/myName.json", true);
+					xmlhttp.send();
+
+			}
+
+					
+			
 		</script>
 
 	</body>

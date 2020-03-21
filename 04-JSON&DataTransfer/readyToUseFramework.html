@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data table</title>
+    <meta charset="UTF-8" />
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      charset="utf8"
+      src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css"
+    />
+  </head>
+  <body>
+    <button>Use framework</button>
+    <table id="myTable" class="display">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Age</th>
+          <th>Country</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+ 
+    <script>
+      $(document).on("click", "button", function() {
+        $("#myTable").DataTable();
+      });
+      table = document.getElementById("myTable");
+      tbody = document.getElementById("tbody");
+      fetch("https://gist.githubusercontent.com/Maladiex3/3df30aef0c788a994afa29bb62748145/raw/53f8a43e537e8b3a1126257be0c4abb51f5f393e/people.json")
+        .then(function(response) {
+          if (response.status !== 200) {
+            console.log(
+              "Looks like there was a problem. Status Code: " + response.status
+            );
+            return;
+          }
+ 
+          // Examine the text in the response
+          response.json().then(function(data) {
+            for (let i = 0; i < data.length; i++) {
+              let tr = document.createElement("tr");
+              let name = document.createElement("td");
+              let surname = document.createElement("td");
+              let age = document.createElement("td");
+              let country = document.createElement("td");
+              let email = document.createElement("td");
+              name.appendChild(document.createTextNode(data[i].name));
+              surname.appendChild(document.createTextNode(data[i].surname));
+              age.appendChild(document.createTextNode(data[i].age));
+              country.appendChild(document.createTextNode(data[i].country));
+              email.appendChild(document.createTextNode(data[i].email));
+              tr.appendChild(name);
+              tr.appendChild(surname);
+              tr.appendChild(age);
+              tr.appendChild(country);
+              tr.appendChild(email);
+              tbody.appendChild(tr);
+              table.appendChild(tbody);
+            }
+          });
+        })
+        .catch(function(err) {
+          console.log("Fetch Error :-S", err);
+        });
+    </script>
+  </body>
+</html>
