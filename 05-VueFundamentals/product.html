@@ -4,21 +4,51 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-  <h1>Grades</h1>    
+  <h1>Grades</h1>   <br>
+
+  <div id="app">
+    <h2>RECIPT<br>
+      ----------------- </h2>
+    <p>{{ getRecipe() }}</p>
+    =========================
+    <p><b>Total: 62.73 zł</b></p>
+  </div>
+
+    
+     
+ 
 
   <script>
+
     var app = new Vue({
       el: '#app',
       data: {
         product: {
-          name: 'book',
-          unitPrice: 17.5,
+          product: 'book',
+          unitPrice: '17.5',
           quantity: 3,
-          VAT: 23
+          amount: 51,
+          VAT: 23,
+        }
+      },
+      methods:{
+        getRecipe: function() {
+          return 'Product: ' + this.product.product + '\nUnit Price:' + this.product.unitPrice  + 'zł' + '\nQuanitity: ' + this.product.quantity + '\nAmount: ' + this.product.amount + 'zł' + '\nVAT Tax Rate: ' + this.product.VAT;
         }
       }
     });
+
   </script>
 
 </body>
+
+<style>
+body {
+  
+  font-family: 'Courier New', Courier, monospace;
+} 
+p{
+  white-space: pre-wrap;
+}
+</style>
 </html>

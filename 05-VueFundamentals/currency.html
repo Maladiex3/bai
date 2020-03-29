@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <table>
+            <thead>
+                <th>Currency</th>
+                <th>Code</th>
+                <th>Mid</th>
+            </thead>
+            <tbody>
+                <tr v-for="mon in money" :key="mon.code">
+                    <td>{{mon.currency}}</td>
+                    <td>{{mon.code}}</td>
+                    <td>{{mon.mid}}</td>
+                </tr>
+                   
+            </tbody>
+    
+        </table>
+    </div>
+    
+</body>
+</html>
+
+<script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+            money: [],
+            a: [2,3,4,5,6,7,8,89]
+      },
+      created() {
+        let arr = []
+        fetch('http://api.nbp.pl/api/exchangerates/tables/A/')
+        .then(
+    function(response) {
+        
+      if (response.status !== 200) {
+        console.log('Looks like there was a problem. Status Code: ' +
+          response.status);
+        return;
+      }
+
+      // Examine the text in the response
+      response.json().then(function(data) {
+            data[0].rates.map(item => {
+                arr.push(item)
+            })
+            
+      });
+      
+    }
+    
+
+  )
+  .catch(function(err) {
+    console.log('Fetch Error :-S', err);
+  });
+  this.money = arr
+ 
+      },
+        methods: {
+       
+        }
+
+    });
+  </script>
+
+<style>
+table, th,td{
+    border: 1px black solid;
+    padding: 10px;
+    text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+}
+</style>

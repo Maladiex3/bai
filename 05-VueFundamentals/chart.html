@@ -1,9 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
 </head>
 <body>
+ <div id="app">
+    <v-btn v-on:click="displayChart()" round>--Click here--</v-bt>
+    <p>{{getLanguageList}}</p>
+    <p>{{getPopularityList}}</p>
+
+  </div>
+  <canvas id="myChart" width="400" height="400"></canvas>
+<script>
+  var languageArr = new Array();
+  var popularityArr = new Array();
+
+  var ctx = document.getElementById('myChart').getContext('2d');
+
+
+</script>
+
   <script>
     var app = new Vue({
       el: '#app',
@@ -30,7 +50,61 @@
             popularity: 7.37
           }
         ] 
-      }
+      },
+      computed:{
+        getLanguageList: function(){
+          for(i=0; i<this.films.length;i++){
+               languageArr.push(this.films[i].language)
+            }
+            return languageArr
+        },
+        getPopularityList: function(){
+          for(i=0; i<this.films.length;i++){
+               popularityArr.push(this.films[i].popularity)
+            }
+            return popularityArr
+          }
+        },
+        methods: {
+         displayChart: function(){
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: languageArr,
+        datasets: [{
+            label: '# of Votes',
+            data: popularityArr,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});}
+        }
+
     });
   </script>
 </body>

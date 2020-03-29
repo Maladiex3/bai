@@ -8,8 +8,9 @@
     <p>DO WYKOANANIA</p>
     <ol>
       <li v-for="item in todo">
-      {{ item}}
+      {{item}}{{sortedList}}
       </li> 
+      <p></p>
     </ol>
    
   </div>
@@ -22,8 +23,14 @@
           'Purchase two tickets to cinema',
           'Feed cat',
           'Pay cable bill',
-          'Go shopping'
+          'Go shopping',
+        
           ]
+      },
+      computed: {
+        sortedList: function(){
+          this.todo.sort();
+        }
       }
     });
   </script>

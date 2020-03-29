@@ -3,6 +3,17 @@
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
+<div id='app' >
+ <p>
+  {{company.toUpperCase()}} <br>
+  {{address}} <br>
+  {{postcode}} {{city}} <br>
+  tel. {{landline}}, {{mobile}} <br>
+  <a href="http://www.unikpol.pl">{{web}}</a>
+ </p>
+</div>
+
 <body>
   <script>
     var app = new Vue({
@@ -21,3 +32,13 @@
 
 </body>
 </html>
+
+<style>
+p {
+  text-align:center;
+  padding: 30px 0;
+  width: 300px;
+  border: 1px solid black;
+ 
+}
+</style>
