@@ -1,0 +1,33 @@
+<html>
+   <head>
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+     
+     </head>
+   <body>
+       <div id="app">
+        <p>Counter</p>
+        <Counter></Counter>
+        </div>
+   </body>
+
+</html>
+
+<script>
+
+var counter= {  template : `<div><p> {{count}}</p><button v-on:click="count++">Dodaj</button> <button v-on:click="count--">Odejmij</button></div>`,
+    data: function(){
+        return {
+            count: 0
+        }
+    },
+}
+
+
+var app = new Vue({
+   el: '#app',
+   components: {
+       "Counter": counter
+   }
+ 
+});
+</script>
